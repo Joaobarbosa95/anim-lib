@@ -1,24 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
+import useAnimation from "./useAnimation"
+import { useEffect } from "react"
 
 function App() {
+  const { Animation: F, animation, startFadeIn, startFadeOut } = useAnimation()
+  
+  useEffect(() => {
+    let i, j
+
+    i = setTimeout(() => {
+        startFadeIn()
+    }, 3000)
+
+    return () => {
+        clearTimeout(i)
+    }
+  }, []) 
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <pre>
+    <F anim={animation}>
+    <div>
+      hello
     </div>
+    </F >
+    <button onClick={startFadeOut}>Fade</button>
+    </pre>
   );
 }
 
